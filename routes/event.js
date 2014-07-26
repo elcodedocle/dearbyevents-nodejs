@@ -8,7 +8,7 @@ var fs = require('fs'),
     input,
     output;
 
-var parser = csvParse({delimiter: ','}, function(err, data){
+var parser = csvParse({delimiter: ',',columns: true}, function(err, data){
     output = data;
 });
 
