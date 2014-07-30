@@ -20,6 +20,7 @@
     "express": "3.15.0",
     "jade": "*",
     "stylus": "*",
-    "csv-parse": "*"
+    "csv-parse": "*",
+    "mongoose": "*"
   }
 }
