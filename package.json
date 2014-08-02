@@ -7,7 +7,7 @@
       "email": "gael.abadin@gmail.com",
       "url": "http://dearbyevents.com"
   },
-  "version": "0.0.1",
+  "version": "0.0.2-beta",
   "private": true,
   "scripts": {
     "start": "node app.js"

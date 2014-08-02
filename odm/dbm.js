@@ -58,15 +58,17 @@ db.once('open', function callback () {
     
 });
 */
-
+var geoSchema = mongoose.Schema({
+    type: String, 
+    coordinates: [Number,Number]
+})
 var dbeSchema = mongoose.Schema({
     eventId: String,
     imageUrl: String,
     eventName: String,
     categories: String,
+    locationGeometry: [geoSchema],
     locationName: String,
-    locationLat: Number,
-    locationLong: Number,
     dateTimeStart: String,
     dateTimeEnd: String,
     url: String,

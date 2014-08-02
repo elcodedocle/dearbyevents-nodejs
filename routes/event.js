@@ -15,15 +15,40 @@ var parser = csvParse({delimiter: ',',columns: true}, function(err, data){
 
 fs.createReadStream('data/verybasicdataset.csv').pipe(parser);
 */
-var kk = require('../odm/dbm.js');
+var dbm = require('../odm/dbm.js');
 exports.list = function(req, res){
-    console.log(kk);
-    kk.find(
-        function (err, events) {
-            if (err) {
-              return console.error(err);
+    //console.log(req.params);
+    if (
+        (typeof req.params.location != "undefined")
+        && (typeof req.params.distance != "undefined")
+        ){
+
+        dbm.find(
+            { 
+                locationGeometry: { 
+                    $geoWithin: { 
+                        $centerSphere: [
+                            req.params.location.split(',') ,
+                            parseFloat(req.params.distance) / 6371 
+                        ] 
+                    } 
+                } 
+            },
+            function (err, events) {
+                if (err) {
+                    return console.error(err);
+                }
+                return res.json(events);
             }
-            return res.json(events);
-        }
-    );
+        );
+    } else {
+        dbm.find(
+            function (err, events) {
+                if (err) {
+                  return console.error(err);
+                }
+                return res.json(events);
+            }
+        );
+    }
 };
